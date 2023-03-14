@@ -1,0 +1,39 @@
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+  
+  .field{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    label{
+      color: #797878;
+      font-size: 12px;
+    }
+    input{
+      padding: 0px 12px;
+      min-height: 40px;
+      border-radius: 4px;
+    }
+    input[type="checkbox"]{
+      padding: 0px 0px;
+      min-height: 18px;
+    }
+  }
+  button{
+    align-self: center;
+    min-height: 40px;
+    width: 250px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+    background-color:#00a046;
+    font-size: 18px;
+    color: white;
+    &:hover{
+      background-color: #44b26f;
+    }
+  }
+}
