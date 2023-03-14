@@ -1,41 +1,35 @@
-import React, { useCallback, useState } from "react"
-import Field from "./Field"
-import { FormState, IFieldsProps } from "./types"
-import './formBuilder.scss'
+import React, { useCallback, useState } from "react";
 
+import './formBuilder.scss';
 
-interface IFormBuilder {
-  submitForm: (value: FormState) => void
-  fields: IFieldsProps[]
-}
+import Field from "../Fields/Field";
+import { FormState, FormBuilderInput, IFormBuilder } from "./types";
+import { UpdateStateFields } from "../Fields/types";
 
-const FormBuilder = ({ submitForm, fields }: IFormBuilder) => {
-  const [result, setResult] = useState<FormState>({})
+const FormBuilder: React.FC<IFormBuilder> = ({ submitForm, fields }): JSX.Element => {
+  const [formValue, setFormValue] = useState<FormState>({});
 
-  const changeResult = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setResult((prevValues: FormState) => ({
-      ...prevValues,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  }, [])
+  const updateStateFields = useCallback(({ valueInput, name }: UpdateStateFields) => {
+    setFormValue((prev) => ({ ...prev, [name]: valueInput[name] }))
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    submitForm(result)
-  }
+  const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    submitForm(formValue);
+  };
 
-  const viewFields = fields.map((value) => <Field
+  const viewFields = fields.map((value: FormBuilderInput) => <Field
+    key={value.name}
     {...value}
-    key={value.id}
-    changeResult={changeResult}
-  />)
+    updateStateFields={updateStateFields}
+  />);
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={onHandleSubmit}>
       {viewFields}
       <button type="submit" >Submit</button>
     </form>
   )
-}
-export default FormBuilder
+};
+
+export default FormBuilder;

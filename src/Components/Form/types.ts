@@ -1,10 +1,14 @@
-export interface IFieldsProps {
-  id: string
+export interface FormBuilderInput {
   type: string
   label: string
   name: string
-  isRequired?: boolean
-  initialValue?: string
-}
+  isRequired: boolean
+};
 
-export type FormState = Record<string, string | boolean>;
+export interface IFormBuilder {
+  submitForm: (value: FormState) => void
+  fields: FormBuilderInput[]
+};
+
+export type IInputValue = string | boolean;
+export type FormState = Record<string, IInputValue>;

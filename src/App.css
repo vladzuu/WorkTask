@@ -5,6 +5,7 @@
   min-width: 350px;
   padding: 12px;
 }
+
 #root{
   min-height: 100vh;
   display: flex;
