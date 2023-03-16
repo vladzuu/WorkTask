@@ -17,5 +17,8 @@ form{
     &:hover{
       background-color: #44b26f;
     }
+    &:disabled{
+      background-color:gray;
+    }
   }
 }

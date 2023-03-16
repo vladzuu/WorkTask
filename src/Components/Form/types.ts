@@ -1,14 +1,28 @@
-export interface FormBuilderInput {
-  type: string
-  label: string
-  name: string
-  isRequired: boolean
+export type IInputValue = string | boolean | number;
+
+export interface IFormBuilderInput {
+  type: string;
+  label: string;
+  name: string;
+  isRequired: boolean;
+  validations: ValidationsMethods[]
 };
 
-export interface IFormBuilder {
-  submitForm: (value: FormState) => void
-  fields: FormBuilderInput[]
+export interface ValidationsMethods {
+  function: (value: IInputValue, expected?: any, state?: FormState) => { isValid: boolean, error: string };
+  expected?: any
 };
 
-export type IInputValue = string | boolean;
-export type FormState = Record<string, IInputValue>;
+export interface IFormBuilderProps {
+  submitForm: (value: FormState) => void;
+  fields: IFormBuilderInput[];
+};
+
+export interface IInputState {
+  value: IInputValue;
+  name: string;
+  isValid: boolean;
+  error?: string;
+};
+
+export type FormState = Record<string, IInputState>;

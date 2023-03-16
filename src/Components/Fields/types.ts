@@ -1,19 +1,23 @@
-import { FormState } from './../Form/types';
+import { IInputState, ValidationsMethods } from './../Form/types';
 
-export interface FieldsProps {
+export interface IFieldsProps {
   type: string;
   label: string;
   name: string;
   isRequired: boolean;
-  updateStateFields: ({ valueInput, name }: UpdateStateFields) => void;
+  validations: ValidationsMethods[]
+  formValue: IInputState
+  updateStateFields: ({ valueInput, name }: IUpdateStateFields) => void;
+  checkFieldValid: ({ valueInput, name }: IUpdateStateFields) => void;
 };
 
-export interface UpdateStateFields {
-  valueInput: FormState
-  name: string
+export interface IUpdateStateFields {
+  valueInput: string;
+  name: string;
+  validations: ValidationsMethods[];
 };
 
-export enum typeInput {
+export enum EnumTypeInput {
   Text = 'text',
   Checkbox = 'checkbox',
 };

@@ -2,12 +2,10 @@ import React from 'react';
 
 import './App.css';
 
-import { fields } from './components/config/data';
+import { fields } from './config/data';
 import FormBuilder from './components/Form/FormBuilder';
 
 import { FormState } from './components/Form/types';
-
-
 
 const App: React.FC = (): JSX.Element => {
   const submitForm = (value: FormState) => {
