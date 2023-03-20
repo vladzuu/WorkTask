@@ -17,8 +17,9 @@ const FormBuilder: React.FC<IFormBuilderProps> = ({ submitForm, fields }): JSX.E
   useEffect(() => {
     const keys = Object.keys(formError)
     const arrIsValid: boolean[] = keys.map((value) => formError[value].isValid)
+    console.log(formError)
     setIsDisabledButton(!arrIsValid.every((value) => value))
-  }, [formValue]);
+  }, [formError]);
 
   useEffect(() => {
     let obj: FormError = {}
