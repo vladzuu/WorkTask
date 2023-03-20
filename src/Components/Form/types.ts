@@ -19,10 +19,11 @@ export interface IFormBuilderProps {
 };
 
 export interface IInputState {
-  value: IInputValue;
   name: string;
   isValid: boolean;
   error?: string;
 };
 
-export type FormState = Record<string, IInputState>;
+export type FormError = Record<string, IInputState>
+
+export type FormState = Record<string, string>;

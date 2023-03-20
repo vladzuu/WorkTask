@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import './formBuilder.scss';
 
-import { FormState, IFormBuilderInput, IFormBuilderProps } from "./types";
+import { FormError, FormState, IFormBuilderInput, IFormBuilderProps } from "./types";
 import { IUpdateStateFields } from "../Fields/types";
 
 import Field from "../Fields/Field";
@@ -11,53 +11,47 @@ import callValidation from "./callValidation";
 
 const FormBuilder: React.FC<IFormBuilderProps> = ({ submitForm, fields }): JSX.Element => {
   const [formValue, setFormValue] = useState<FormState>({});
+  const [formError, setFormError] = useState<FormError>({});
   const [isDisabledButton, setIsDisabledButton] = useState<boolean>(true);
 
   useEffect(() => {
-    const arrIsValid: boolean[] = []
-
-    for (let key in formValue) {
-      arrIsValid.push(formValue[key].isValid)
-    }
+    const keys = Object.keys(formError)
+    const arrIsValid: boolean[] = keys.map((value) => formError[value].isValid)
     setIsDisabledButton(!arrIsValid.every((value) => value))
   }, [formValue]);
 
   useEffect(() => {
-    let obj: FormState = {}
+    let obj: FormError = {}
     for (let value of fields) {
       obj[value.name] = {
-        value: '',
         name: value.name,
         isValid: false,
         error: '',
       }
     }
-    setFormValue(obj)
+    setFormError(obj)
   }, []);
 
-  const updateStateFields = useCallback(({ valueInput, name, validations }: IUpdateStateFields) => {
+  const updateStateFields = useCallback(({ valueInput, name }: IUpdateStateFields) => {
     setFormValue((prev) => ({
       ...prev,
-      [name]: {
-        ...prev[name],
-        value: valueInput,
-      }
+      [name]: valueInput,
     }));
   }, []);
 
-  const checkFieldValid = useCallback(({ valueInput, name, validations }: IUpdateStateFields) => {
-    setFormValue((prev) => ({
+  const checkFieldValid = ({ valueInput, name, validations }: IUpdateStateFields) => {
+    setFormError((prev) => ({
       ...prev,
       [name]: {
         ...prev[name],
         ...callValidation({
           validations,
           value: valueInput,
-          state: prev
+          state: formValue
         })
       }
     }));
-  }, []);
+  };
 
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -67,7 +61,7 @@ const FormBuilder: React.FC<IFormBuilderProps> = ({ submitForm, fields }): JSX.E
   const viewFields = fields.map((fields: IFormBuilderInput) => <Field
     key={fields.name}
     {...fields}
-    formValue={formValue[fields.name]}
+    formValue={formError[fields.name]}
     updateStateFields={updateStateFields}
     checkFieldValid={checkFieldValid}
   />);

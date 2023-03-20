@@ -1,9 +1,9 @@
-import { ValidationsMethods } from './types';
+import { ValidationsMethods, FormState } from './types';
 
 interface Params {
   validations: ValidationsMethods[];
   value: any;
-  state: any;
+  state: FormState;
 }
 
 const callValidation = (params: Params) => {

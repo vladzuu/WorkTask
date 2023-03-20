@@ -1,4 +1,4 @@
-import { validation } from '../components/tools/validation/validation';
+import { validation } from '../utills//validation/validation';
 
 import { EnumInputType } from './types';
 import { IFormBuilderInput } from "../components/Form/types";
