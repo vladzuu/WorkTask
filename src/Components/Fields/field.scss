@@ -1,11 +1,19 @@
-.field{
+.field {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  label{
-    color: #797878;
+  
+  label {
     font-size: 12px;
+  }
+
+  .field__label {
+    color: #797878;
+    margin-bottom: 4px;
+  }
+  .field__error{
+    color: red;
+    margin-top: 4px;
   }
 
   input{

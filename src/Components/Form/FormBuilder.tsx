@@ -9,36 +9,42 @@ import Field from "../Fields/Field";
 
 import callValidation from "./callValidation";
 
-const FormBuilder: React.FC<IFormBuilderProps> = ({ submitForm, fields }): JSX.Element => {
+const FormBuilder: React.FC<IFormBuilderProps> = ({ submitForm, fields, children }): JSX.Element => {
   const [formValue, setFormValue] = useState<FormState>({});
   const [formError, setFormError] = useState<FormError>({});
   const [isDisabledButton, setIsDisabledButton] = useState<boolean>(true);
 
   useEffect(() => {
-    const keys = Object.keys(formError)
-    const arrIsValid: boolean[] = keys.map((value) => formError[value].isValid)
-    console.log(formError)
-    setIsDisabledButton(!arrIsValid.every((value) => value))
+    const keys = Object.keys(formError);
+    setIsDisabledButton(!keys.every((value) => formError[value].isValid));
   }, [formError]);
 
   useEffect(() => {
-    let obj: FormError = {}
-    for (let value of fields) {
-      obj[value.name] = {
+    let obj: FormError = fields.reduce<FormError>((acc, value) => {
+      acc[value.name] = {
         name: value.name,
         isValid: false,
         error: '',
-      }
-    }
-    setFormError(obj)
+      };
+      return acc;
+    }, {});
+    setFormError(obj);
   }, []);
 
-  const updateStateFields = useCallback(({ valueInput, name }: IUpdateStateFields) => {
+  useEffect(() => {
+    let obj: FormState = fields.reduce<FormState>((acc, value) => {
+      acc[value.name] = '';
+      return acc;
+    }, {})
+    setFormValue(obj);
+  }, []);
+
+  const updateStateFields = ({ valueInput, name }: IUpdateStateFields) => {
     setFormValue((prev) => ({
       ...prev,
       [name]: valueInput,
     }));
-  }, []);
+  };
 
   const checkFieldValid = ({ valueInput, name, validations }: IUpdateStateFields) => {
     setFormError((prev) => ({
@@ -70,6 +76,7 @@ const FormBuilder: React.FC<IFormBuilderProps> = ({ submitForm, fields }): JSX.E
   return (
     <form noValidate onSubmit={onHandleSubmit}>
       {viewFields}
+      {children}
       <button type="submit" disabled={isDisabledButton}>Submit</button>
     </form>
   )

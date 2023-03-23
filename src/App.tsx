@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { createContext } from 'react';
 
-import './App.css';
+import './App.scss';
 
-import { fields } from './config/data';
-import FormBuilder from './components/Form/FormBuilder';
+import { IUseAuth } from './hooks/useAuth/types';
 
-import { FormState } from './components/Form/types';
+import useAuth from './hooks/useAuth/useAuth';
+
+import HomePage from './pages/HomePage/HomePage';
+
+//@ts-ignore
+export const AuthContext = createContext<IUseAuth>();
 
 const App: React.FC = (): JSX.Element => {
-  const submitForm = (value: FormState) => {
-    console.log(value);
-  };
-
+  const hookValue = useAuth();
   return (
-    <div className="App">
-      <FormBuilder fields={fields} submitForm={submitForm} />
-    </div>
+    <AuthContext.Provider value={hookValue}>
+      <div className="App">
+        <HomePage />
+      </div >
+    </AuthContext.Provider>
   );
 }
 

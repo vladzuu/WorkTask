@@ -1,0 +1,84 @@
+@import '/src/style/variables.scss';
+/* ____________*/
+*{
+	padding: 0;
+	margin: 0;
+	border: 0px;
+}
+*,*:before,*:after{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+nav,footer,header,aside{display: block;}
+html,body{
+	height: 100%;
+	width: 100%;
+	font-size: 100%;
+	line-height: 1;
+	font-size: 14px;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner {padding:0;border:0;}
+a, a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+// h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;} 
+/*-------------------- */
+
+.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
+#root{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top left, powderblue, pink);
+}
+
+button{
+  align-self: center;
+  min-height: 40px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+  background-color:#00a046;
+  font-size: 18px;
+  color: white;
+  margin: 4px 0px;
+  padding: 0px 16px;
+  
+  &:disabled{
+    background-color: #9f9e9e;
+  }
+
+  &:hover{
+    background-color: #44b26f;
+  }
+  
+  &.secondary{
+    background-color:#ffffff00;
+    color: #3e77aa;
+
+    &:hover{
+      color: #ff7878;
+    }
+  }
+}
+input{
+  border: 1px solid gray;
+}

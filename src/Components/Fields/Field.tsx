@@ -4,6 +4,9 @@ import { IFieldsProps, EnumTypeInput } from './types';
 
 import './field.scss';
 
+import Password from '../inputComponents/Password/Password';
+import Checkbox from '../inputComponents/Checkbox/Checkbox';
+
 const Field: React.FC<IFieldsProps> = ({
   label,
   type,
@@ -23,34 +26,58 @@ const Field: React.FC<IFieldsProps> = ({
 
   useEffect(() => {
     updateStateFields({ valueInput: valueInput[name], name, validations });
+    checkFieldValid({ valueInput: valueInput[name], name, validations });
   }, [valueInput]);
 
-  const checkField = () => {
-    checkFieldValid({ valueInput: valueInput[name], name, validations });
+  const onBlur = () => {
     setIsFocus(false);
+    checkFieldValid({ valueInput: valueInput[name], name, validations });
   };
 
   const onFocusInput = () => {
     setIsFocus(true);
   };
 
+  const props = {
+    formValue: formValue,
+    handleInput: handleInput,
+    isFocus: isFocus,
+    isRequired: isRequired,
+    label: label,
+    name: name,
+    onBlur: onBlur,
+    onFocusInput: onFocusInput,
+    type: type,
+    valueInput: valueInput,
+  };
+
+  if (type === EnumTypeInput.Password) {
+    return <Password
+      {...props}
+    />
+  };
+
+  if (type === EnumTypeInput.Checkbox) {
+    return <Checkbox
+      {...props}
+    />
+  };
+
   return (
     <p className="field">
-      <label >{label}</label>
+      <label className="field__label">{label}</label>
       <input
-        onBlur={checkField}
+        onBlur={onBlur}
         onFocus={onFocusInput}
         type={type}
         value={type === EnumTypeInput.Text ? valueInput[name] : undefined}
-        checked={type === EnumTypeInput.Checkbox ? valueInput[name] : undefined}
         name={name}
         required={isRequired}
         onChange={handleInput}
       />
-      {(!formValue?.isValid && !isFocus) && <label style={{ color: 'red' }} >{formValue?.error}</label>}
+      {(!formValue?.isValid && !isFocus) && <label className="field__error">{formValue?.error}</label>}
     </p>
   );
 };
 
-export default React.memo(Field);
-
+export default Field;

@@ -1,9 +1,9 @@
-import { validation } from '../utills//validation/validation';
+import { validation } from '../utills/validation/validation';
 
 import { EnumInputType } from './types';
 import { IFormBuilderInput } from "../components/Form/types";
 
-export const fields: IFormBuilderInput[] = [
+export const fieldsRegistration: IFormBuilderInput[] = [
   {
     label: 'First Name',
     type: EnumInputType.Text,
@@ -34,23 +34,26 @@ export const fields: IFormBuilderInput[] = [
       },
       {
         function: validation.minLength,
-        expected: 2
+        expected: 2,
       },
       {
         function: validation.maxLength,
-        expected: 15
+        expected: 15,
       },
     ]
   },
   {
     label: 'E-mail',
     type: EnumInputType.Email,
-    name: 'e-mail',
+    name: 'e_mail',
     isRequired: true,
     validations: [
       {
         function: validation.email,
       },
+      {
+        function: validation.userExistenceCheck,
+      }
     ]
   },
   {
@@ -64,11 +67,11 @@ export const fields: IFormBuilderInput[] = [
       },
       {
         function: validation.minLength,
-        expected: 8
+        expected: 8,
       },
       {
         function: validation.maxLength,
-        expected: 30
+        expected: 30,
       },
     ]
   },
@@ -80,7 +83,7 @@ export const fields: IFormBuilderInput[] = [
     validations: [
       {
         function: validation.confirmPassword,
-        expected: 'password'
+        expected: 'password',
       },
 
     ]
@@ -96,4 +99,30 @@ export const fields: IFormBuilderInput[] = [
       },
     ]
   },
+];
+
+export const fieldsSignIn: IFormBuilderInput[] = [
+  {
+    label: 'E-mail',
+    type: EnumInputType.Email,
+    name: 'e_mail',
+    isRequired: true,
+    validations: [
+      {
+        function: validation.email,
+      },
+    ]
+  },
+  {
+    label: 'Password',
+    type: EnumInputType.Password,
+    name: 'password',
+    isRequired: true,
+    validations: [
+      {
+        function: validation.notEmpty,
+      },
+    ]
+  },
+
 ];

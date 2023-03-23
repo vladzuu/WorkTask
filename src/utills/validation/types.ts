@@ -6,4 +6,6 @@ export enum EnumValidationTypes {
   MinLength = 'minLength',
   MaxLength = 'maxLength',
   ConfirmPassword = 'confirmPassword',
+  UserExistenceCheck = 'userExistenceCheck',
+  NotEmpty = 'notEmpty'
 };

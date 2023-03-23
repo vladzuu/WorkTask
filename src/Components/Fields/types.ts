@@ -5,8 +5,8 @@ export interface IFieldsProps {
   label: string;
   name: string;
   isRequired: boolean;
-  validations: ValidationsMethods[]
-  formValue: IInputState
+  validations: ValidationsMethods[];
+  formValue: IInputState;
   updateStateFields: ({ valueInput, name }: IUpdateStateFields) => void;
   checkFieldValid: ({ valueInput, name }: IUpdateStateFields) => void;
 };
@@ -20,4 +20,5 @@ export interface IUpdateStateFields {
 export enum EnumTypeInput {
   Text = 'text',
   Checkbox = 'checkbox',
+  Password = 'password',
 };

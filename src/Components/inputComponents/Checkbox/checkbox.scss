@@ -1,0 +1,25 @@
+.field{
+
+  &__checkbox{ 
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:8px ;
+    
+    label{
+      color: black;
+      margin: 0;
+    }
+    
+    input{
+      width:24px ;
+      line-height: 24px;
+    }
+    
+    .field__checkbox.checkbox{
+      justify-self: center;
+    }
+
+  }
+}

@@ -16,6 +16,7 @@ export interface ValidationsMethods {
 export interface IFormBuilderProps {
   submitForm: (value: FormState) => void;
   fields: IFormBuilderInput[];
+  children?: React.ReactNode
 };
 
 export interface IInputState {
@@ -24,6 +25,6 @@ export interface IInputState {
   error?: string;
 };
 
-export type FormError = Record<string, IInputState>
+export type FormError = Record<string, IInputState>;
 
 export type FormState = Record<string, string>;

@@ -4,7 +4,7 @@ interface Params {
   validations: ValidationsMethods[];
   value: any;
   state: FormState;
-}
+};
 
 const callValidation = (params: Params) => {
 
@@ -18,7 +18,7 @@ const callValidation = (params: Params) => {
   return {
     isValid,
     error: errorM,
-  }
+  };
 
-}
+};
 export default callValidation;

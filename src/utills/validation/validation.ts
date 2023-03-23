@@ -7,7 +7,7 @@ export const validation = {
     return (condition.test(value)) ?
       { isValid: true, error: '' }
       :
-      { isValid: false, error: 'Please enter a isValid email' }
+      { isValid: false, error: 'Please enter a valid email' }
   },
   [EnumValidationTypes.Password]: (value: any) => {
     const condition = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{1,}/g
@@ -30,7 +30,7 @@ export const validation = {
       ?
       { isValid: true, error: '' }
       :
-      { isValid: false, error: 'You must agree to the rules' }
+      { isValid: false, error: 'You must agree with rules' }
   },
   [EnumValidationTypes.MinLength]: (value: any, expected: any) => {
     return (value.length >= expected) ?
@@ -49,5 +49,17 @@ export const validation = {
       { isValid: true, error: '' }
       :
       { isValid: false, error: `Passwords must match` }
+  },
+  [EnumValidationTypes.UserExistenceCheck]: (value: any) => {
+    return (localStorage.getItem(value) === null) ?
+      { isValid: true, error: '' }
+      :
+      { isValid: false, error: `User with this email is already registered` }
+  },
+  [EnumValidationTypes.NotEmpty]: (value: any) => {
+    return (value.length > 0) ?
+      { isValid: true, error: '' }
+      :
+      { isValid: false, error: `Field must be filled` }
   },
 };
