@@ -4,7 +4,7 @@ import { Audio } from 'react-loader-spinner';
 const Loader: React.FC = (): JSX.Element => {
 
   return (
-    <div>
+    <div className="center-block">
       <Audio
         height="80"
         width="80"

@@ -1,0 +1,14 @@
+.drop-menu{
+  position: absolute;
+  top: 100%;
+  right: 140px;
+  z-index: 100;
+  padding: 8px;
+
+  .card-drop-menu{
+    min-width: 200px; 
+    margin-top: 1; 
+    display: flex; 
+    flex-direction: column;
+  }
+}

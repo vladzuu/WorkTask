@@ -1,8 +1,29 @@
+@import '/src/style/variables.scss';
+
 .dashboard{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  position:relative;
+  flex-grow: 1;
 
   span{
     font-size: 20px;
   }
+  
+  .block-shopping{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: $BgCards;
+    background-image: url('./../../img/blue-background.png');
+    background-repeat: repeat-x;
+    flex-grow: 1;
+  }
+   .button-view{
+    position: absolute;
+    top: 20px; 
+    right: 20px; 
+    min-width: 120px;
+   }
+
 }

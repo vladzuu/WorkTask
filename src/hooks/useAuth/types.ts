@@ -7,6 +7,8 @@ export interface IUseAuth {
   logOut: () => void;
   logIn: (value: FormState) => void;
   setUser: (value: FormState) => void;
+  clearError: () => void;
+  syncAuth: () => void;
   userData: any;
 };
 

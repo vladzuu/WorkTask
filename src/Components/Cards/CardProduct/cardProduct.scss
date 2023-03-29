@@ -1,0 +1,19 @@
+.card-product{
+  width: 300px; 
+  height: 225px;
+  display: flex; 
+  flex-direction: column;
+  
+  .card-header{
+    display: flex;
+    gap: 16px;
+  }
+
+  .cart-footer{
+    align-self: end;
+  }
+
+  .card-button{
+    min-width: 75px;
+  }
+}

@@ -1,24 +1,19 @@
-import React, { createContext } from 'react';
+import React, { useEffect } from 'react';
 
 import './App.scss';
 
-import { IUseAuth } from './hooks/useAuth/types';
-
 import useAuth from './hooks/useAuth/useAuth';
 
-import HomePage from './pages/HomePage/HomePage';
-
-//@ts-ignore
-export const AuthContext = createContext<IUseAuth>();
+import RoutesApp from './Routes';
 
 const App: React.FC = (): JSX.Element => {
-  const hookValue = useAuth();
+  const { syncAuth } = useAuth();
+  useEffect(() => syncAuth(), []);
+
   return (
-    <AuthContext.Provider value={hookValue}>
-      <div className="App">
-        <HomePage />
-      </div >
-    </AuthContext.Provider>
+    <>
+      <RoutesApp />
+    </>
   );
 }
 

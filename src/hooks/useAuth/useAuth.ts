@@ -1,68 +1,72 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import UserApi from '../../api/userApi/userApi';
 import AuthApi from '../../api/authApi/authApi';
+import { useAppDispatch, RootState } from '../../store/store';
 
 import { FormState } from '../../components/Form/types';
 import { IUseAuth, IDataAuth } from './types';
+import { setIsErrorPassword, setIsLoading, setLogin, setLogout } from '../../store/slice/auth/auth';
 
 const userApi = new UserApi();
 const authApi = new AuthApi();
 
-const initialDataAuth: IDataAuth = {
-  isAuth: false,
-  isErrorPassword: false,
-  isLoading: false,
-  userData: {}
-};
-
 const useAuth = (): IUseAuth => {
 
-  const [dataAuth, setDataAuth] = useState<IDataAuth>(initialDataAuth);
   const navigate = useNavigate();
+  const auth = useSelector((state: RootState) => state.auth)
+  const dispatch = useAppDispatch()
 
   const syncAuth = () => {
-    setDataAuth({ ...dataAuth, isLoading: true });
+    dispatch(setIsLoading(true))
     userApi.getUser().then(({ userData, isAuth }) => {
-      setDataAuth({ ...dataAuth, isLoading: false, isAuth, userData });
+      console.log(userData)
+      dispatch(setLogin({ userData, isAuth }))
     })
   };
 
   const logOut = () => {
-    setDataAuth({ ...dataAuth, isLoading: true })
+    dispatch(setIsLoading(true))
     authApi.logOut().then(() => {
-      setDataAuth({ ...dataAuth, isLoading: false, isAuth: false });
+      dispatch(setLogout())
     })
   };
 
   const logIn = (value: FormState): void => {
     authApi.login(value).then(({ isSuccess }) => {
-      setDataAuth({ ...dataAuth, isErrorPassword: !isSuccess })
+      dispatch(setIsErrorPassword(!isSuccess))
       if (isSuccess) {
+        dispatch(setIsErrorPassword(!isSuccess))
         syncAuth();
       }
     });
   };
 
   const setUser = (value: FormState) => {
-    setDataAuth({ ...dataAuth, isLoading: true })
-    userApi.setUser(value).then(() => {
-      setDataAuth({ ...dataAuth, isLoading: false })
+    dispatch(setIsLoading(true))
+    const updateValue = { ...value, viewProduct: true }
+    //@ts-ignore
+    userApi.setUser(updateValue).then(() => {
+      dispatch(setIsLoading(false))
       navigate('/')
     })
   };
 
-  useEffect(() => {
-    syncAuth();
-  }, []);
+  const clearError = () => {
+    dispatch(setIsErrorPassword(false))
+  }
 
   return {
-    ...dataAuth,
+    isAuth: auth.isAuth,
+    isErrorPassword: auth.isErrorPassword,
+    isLoading: auth.isLoading,
+    userData: auth.userData,
     logOut,
     logIn,
     setUser,
-
+    clearError,
+    syncAuth,
   };
 };
 

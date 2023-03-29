@@ -26,7 +26,7 @@ class AuthApi {
       const isSuccess = check();
       setTimeout(() => {
         resolve({ isSuccess });
-      }, 1000);
+      }, 10);
     });
   };
 

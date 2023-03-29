@@ -38,7 +38,7 @@ const Password: React.FC<IPasswordProps> = ({
           :
           <AiOutlineEye className='logo-svg' onClick={(e) => setVisiblePass('password')} />}
       </span>
-      {(!formValue?.isValid && !isFocus) && <label className="field__error">{formValue?.error}</label>}
+      <label className="field__error">{!formValue?.isValid && !isFocus && formValue?.error}</label>
     </p>
   );
 };

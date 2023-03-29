@@ -1,0 +1,23 @@
+.empty-basket{
+  font-size: 24px;
+  display:flex;
+  justify-content: center;
+}
+
+.box-basket{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: #ffffff;
+  box-shadow: 24px;
+  padding: 16px 32px 18px 32px;
+  border-radius: 8px;
+}
+
+.basket-header{
+  display: flex; 
+  flex-grow: 2;
+  align-items: center; 
+}

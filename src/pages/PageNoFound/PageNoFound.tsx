@@ -6,10 +6,10 @@ import './pageNoFound.scss';
 const PageNoFound = () => {
 
   return (
-    <div className="page-no-found">
+    <div className="page-no-found center-block" >
       <span className="page-no-found__text">Page does not exist</span>
       <NavLink to="/dashboard">
-        <button>TO HOME</button>
+        TO HOME
       </NavLink>
     </div>
   );

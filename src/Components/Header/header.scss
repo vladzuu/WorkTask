@@ -1,0 +1,44 @@
+@import '/src/style/variables.scss';
+
+.header-main{
+  position: relative;
+  display: flex;
+  height: 70px;
+  background-color: white;
+  
+  .logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    font-size: 20px;
+  }
+
+  .header-main-user{
+    background-color: $BgNav;
+    padding-right: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-left: 3px solid $BgCards;
+    padding: 0 15px 0 10px;
+  }
+  .header-main-content{
+    padding: 0 16px;
+    background-color: $BgNav;
+    display: flex;
+    flex-grow: 1;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .header-ava-user{
+    cursor: pointer;
+    width: 48; 
+    height: 48; 
+    margin-right: 8px 
+  }
+  .header-user-name{
+    cursor: pointer;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ICheckBoxProps } from './types';
 
 import './checkbox.scss';
@@ -29,7 +29,7 @@ const Checkbox: React.FC<ICheckBoxProps> = ({
         />
         <label className="field__label">{label}</label>
       </span>
-      {(!formValue?.isValid && !isFocus) && <label className="field__error checkbox">{formValue?.error}</label>}
+      <label className="field__error checkbox">{!formValue?.isValid && !isFocus && formValue?.error}</label>
     </p>
   );
 };

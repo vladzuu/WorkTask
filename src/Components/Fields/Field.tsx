@@ -75,7 +75,7 @@ const Field: React.FC<IFieldsProps> = ({
         required={isRequired}
         onChange={handleInput}
       />
-      {(!formValue?.isValid && !isFocus) && <label className="field__error">{formValue?.error}</label>}
+      <label className="field__error">{!formValue?.isValid && !isFocus && formValue?.error}</label>
     </p>
   );
 };

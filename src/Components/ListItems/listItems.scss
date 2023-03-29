@@ -1,0 +1,10 @@
+@import '/src/style/variables.scss';
+
+.table-products{
+  padding: 130px 16px 16px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap:20px;
+}

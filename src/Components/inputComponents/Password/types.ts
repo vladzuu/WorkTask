@@ -12,3 +12,4 @@ export interface IPasswordProps {
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocusInput: () => void
 };
+

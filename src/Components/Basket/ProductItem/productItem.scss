@@ -1,0 +1,20 @@
+.item-basket{
+  display: flex;
+  gap:16px;
+  margin-top: 16px;
+  
+  .item-column-basket{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buttons-basket{
+    display: flex;
+    align-items: center;
+    gap:4px
+  }
+
+  .name-product-basket{
+    padding-left: 13px;
+  }
+}

@@ -1,0 +1,62 @@
+@import '/src/style/variables.scss';
+
+
+.left-nav-bar{
+  padding: 24px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  background-color: $BgNav;
+
+  span{
+    font-size:14px;
+  }
+  .svg{
+    margin-left: 8px;
+  }
+
+  a{
+    color: $HGray;
+    display: flex;
+    position: relative; 
+    gap: 8px;
+  }
+
+  li{
+    display: flex;
+    position: relative;
+    margin: 8px 0px;
+    height: 25px;
+  }
+
+  li:hover{
+    background-color: rgba(0, 136, 255, 0.305);
+  }
+  a::before{
+    content: '';
+    width: 5px;
+    background-color: $HGray;
+  }
+  a::before {
+    z-index: 100;
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    // left: -10px; 
+    width: 5px; 
+    // height: 100%; 
+    background-color: blue; 
+    opacity: 0; 
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  a:hover::before {
+    opacity: 1; 
+  }
+
+  .logo-link{
+    margin-left: 16px;
+    font-size: 20px;
+    align-self: center;
+  }
+}

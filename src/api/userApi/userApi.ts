@@ -3,6 +3,20 @@ import { EnumLocalStorage } from '../localStorageTypes';
 
 class UserApi {
 
+  changeViewOption(email: string, viewOption: boolean): Promise<void> {
+    return new Promise<void>((resolve) => {
+      const usersJSON = localStorage.getItem(EnumLocalStorage.AllUsers);
+      if (usersJSON) {
+        const parseUsers = JSON.parse(usersJSON);
+        const completeUsers = parseUsers.map((user: any) => (user.email === email) ? { user } : { ...user, viewProduct: viewOption });
+        localStorage.setItem(EnumLocalStorage.AllUsers, JSON.stringify(completeUsers));
+      };
+      setTimeout(() => {
+        resolve();
+      }, 10);
+    });
+  };
+
   addNewUserToStorage(user: User) {
     const usersJSON = localStorage.getItem(EnumLocalStorage.AllUsers);
     localStorage.setItem(EnumLocalStorage.AllUsers, usersJSON

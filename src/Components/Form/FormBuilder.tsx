@@ -1,6 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
-
-import './formBuilder.scss';
+import React, { useEffect, useState } from "react";
 
 import { FormError, FormState, IFormBuilderInput, IFormBuilderProps } from "./types";
 import { IUpdateStateFields } from "../Fields/types";
@@ -8,6 +6,8 @@ import { IUpdateStateFields } from "../Fields/types";
 import Field from "../Fields/Field";
 
 import callValidation from "./callValidation";
+
+import './formBuilder.scss';
 
 const FormBuilder: React.FC<IFormBuilderProps> = ({ submitForm, fields, children }): JSX.Element => {
   const [formValue, setFormValue] = useState<FormState>({});
